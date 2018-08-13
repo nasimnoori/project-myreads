@@ -26,6 +26,8 @@ class BooksApp extends React.Component {
       this.setState(() => ({
         books
       }))
+
+      //this.state.map((book) => {book.shef = 'none'})
     })
   }
 
@@ -38,7 +40,9 @@ class BooksApp extends React.Component {
   handleUpdateShelf = (book) => {
     let selectedBookId = { id: book.target.id } //selected book
     let value = book.target.value //value of the selectd option in the list (currentlyReading, wantToRead, read)
-    BooksAPI.update(selectedBookId, value) //Updates the database
+
+    BooksAPI.update(selectedBookId, value)
+    this.componentDidMount()
   }
 
   render() {
