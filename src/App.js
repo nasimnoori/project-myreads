@@ -20,29 +20,14 @@ class BooksApp extends React.Component {
     })
   }
 
-  /*//Search for books and lists 20 of them, replaces books in the books array
-  searchBooks(query){
-    BooksAPI.search(query).then((books) => {
-      this.setState(() => ({
-        books
-      }))
-
-      //this.state.map((book) => {book.shef = 'none'})
-    })
-  }
-
-  //event handler for search
-  handleSearch = event => {
-    this.searchBooks(event.target.value)
-  }
-*/
   //Moves a book from one shelf to another
   handleUpdateShelf = (book) => {
     let selectedBookId = { id: book.target.id } //selected book
     let value = book.target.value //value of the selectd option in the list (currentlyReading, wantToRead, read)
 
-    BooksAPI.update(selectedBookId, value)
-    this.componentDidMount()
+    BooksAPI.update(selectedBookId, value).then(() => {
+      this.componentDidMount()
+    })
   }
 
   render() {

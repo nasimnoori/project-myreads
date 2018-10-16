@@ -10,9 +10,16 @@ class SearchBooks extends Component{
   //Search for books and lists 20 of them, replaces books in the books array
   searchBooks(query){
     BooksAPI.search(query).then((books) => {
-      this.setState(() => ({
-        books
-      }))
+      this.setState(() => {
+        (books && books.length > 0) && books.map((book) => {
+          book.shelf = 'none'
+          this.props.books.forEach((b) => {
+            book.id === b.id && (book.shelf = b.shelf)
+          })
+          return book
+        })
+        return {books}
+      })
     }).catch(err => console.error(err))
   }
 
@@ -22,7 +29,8 @@ class SearchBooks extends Component{
   }
 
   render(){
-    const {books, updateShelf, searchBooks} = this.props
+    const {updateShelf, searchBooks} = this.props
+    const {books} = this.state
     return(
       <div className="search-books">
         <div className="search-books-bar">
@@ -37,9 +45,9 @@ class SearchBooks extends Component{
         <div className="search-books-results">
           <ol className="books-grid">
 
-          {this.state.books === undefined || !this.state.books.length ?
+          {books === undefined || !books.length ?
             <p>No results found...</p> :
-            this.state.books.map(book =>
+            books.map(book =>
               <Book book={book} updateShelf={updateShelf} />
             )
           }
