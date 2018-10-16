@@ -20,7 +20,7 @@ class BooksApp extends React.Component {
     })
   }
 
-  //Search for books and lists 20 of them, replaces books in the books array
+  /*//Search for books and lists 20 of them, replaces books in the books array
   searchBooks(query){
     BooksAPI.search(query).then((books) => {
       this.setState(() => ({
@@ -35,7 +35,7 @@ class BooksApp extends React.Component {
   handleSearch = event => {
     this.searchBooks(event.target.value)
   }
-
+*/
   //Moves a book from one shelf to another
   handleUpdateShelf = (book) => {
     let selectedBookId = { id: book.target.id } //selected book
@@ -49,7 +49,7 @@ class BooksApp extends React.Component {
     return (<div className="app">
         <Route path='/search' render={() => (
           <SearchBooks
-            searchBooks={this.handleSearch}
+            //searchBooks={this.handleSearch}
             books={this.state.books}
             updateShelf={this.handleUpdateShelf} />
         )} />
